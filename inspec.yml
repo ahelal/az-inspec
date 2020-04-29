@@ -1,0 +1,7 @@
+name: azcli-inspec
+title: Azure cli inspec resources
+summary: This resource pack provides compliance for Azure using the az cli. Since the official pack is very slow to adapt and to add resources
+maintainer: Adham Abdelwahab
+copyright: Adham Abdelwahab
+version: 0.0.1
+license: BSD V3

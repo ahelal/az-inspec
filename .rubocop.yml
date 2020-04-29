@@ -1,0 +1,8 @@
+AllCops:
+  NewCops: enable
+Style/MethodMissingSuper:
+  Enabled: false
+Style/MissingRespondToMissing:
+  Enabled: false
+Layout/LineLength: 
+  Max: 130
