@@ -1,19 +1,26 @@
 # frozen_string_literal: true
 
 require 'inspec/utils/object_traversal'
+require 'open3'
+require 'json'
 
-# AZ CLI version
+# AZ basic class
 class AzBasic < Inspec.resource(1)
   name 'az_basic'
+  desc 'Baisc parent resource should not be used directly'
 
   include ObjectTraverser
-  def initialize(subcommand, list, resource_name = nil, resource_group = nil)
-    raise Inspec::Exceptions::ResourceFailed, "a type of resource is needed. Can't be empty" if subcommand.to_s.length.zero?
+  def initialize(subcommand, list = nil, resource_name = nil, resource_group = nil, extra_args = nil)
+    raise Inspec::Exceptions::ResourceFailed, "A resource is needed. Can't be empty" if subcommand.to_s.length.zero?
+
+    # TODO: disable any main commands
+    # ['configure', 'feedback', 'find', 'interactive', 'login', 'logout', 'rest']
 
     command = "az #{subcommand} #{list}"
     command = "#{command} --name #{resource_name}" if resource_name
     command = "#{command} --resource-group #{resource_group}" if resource_group
-    @stdout, @stderr, @success = run_cmd(command, true)
+    command = "#{command} #{extra_args}" if extra_args
+    @stdout, @stderr, @success = azrun(command)
   end
 
   def exists
@@ -33,5 +40,15 @@ class AzBasic < Inspec.resource(1)
     # uses ObjectTraverser.extract_value to walk the hash looking for the key,
     # which may be an Array of keys for a nested Hash.
     extract_value(key, @stdout)
+  end
+
+  def azrun(cmd)
+    stdout, stderr, s = Open3.capture3(cmd)
+    # return [nil, 'not found', s.success?] if !s.success? && stdout.include?('was not found')
+
+    stdout = JSON.parse(stdout) if s.success?
+    [stdout, stderr, s.success?]
+  rescue StandardError => e
+    raise Inspec::Exceptions::ResourceSkipped, "AZ CLI: #{e}"
   end
 end

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'azbasic'
-
 # AZ single resoruce
 class AzResource < AzBasic
   name 'azresource'
-  def initialize(subcommand, resource_name, resource_group = nil)
-    super(subcommand, 'show', resource_name, resource_group)
-    @__resource_name__ = "#{@__resource_name__}: #{subcommand} #{resource_name}/#{resource_group}"
+  def initialize(subcommand, resource_name, resource_group = nil, extra_args = nil)
+    super(subcommand, 'show', resource_name, resource_group, extra_args)
+    @__resource_name__ = "#{@__resource_name__}: #{subcommand} -n #{resource_name}"
+    @__resource_name__ = "#{@__resource_name__} -g #{resource_group}" if resource_group
   end
 end

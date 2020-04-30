@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'run'
-
 # AZ CLI version
-class AzCli < Inspec.resource(1)
-  name 'az'
+class AzCLI < AzBasic
+  name 'azcli'
+
   def initialize
-    @stdout, @stderr, @success = run_cmd('az version', true)
-    raise Inspec::Exceptions::ResourceSkipped, "AZ CLI: #{@stderr}" unless @success
+    super('version')
   end
 
   def exists
