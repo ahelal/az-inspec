@@ -3,6 +3,7 @@
 describe azcli do
   its('exists') { should eq true }
   its('version') { should eq '2.0.81' }
+  its('version') { should cmp > '2.0.75' }
   its('extensions') { should include 'aks-preview' }
 end
 
