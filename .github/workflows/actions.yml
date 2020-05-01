@@ -66,13 +66,13 @@ jobs:
       with:
         ruby-version: 2.6
 
-    - name: Cache bundle modules
-      uses: actions/cache@v1
-      env:
-        cache-name: cache-bundle-modules
-      with:
-        path: ~/.bundle
-        key: ${{ runner.os }}
+    # - name: Cache bundle modules
+    #   uses: actions/cache@v1
+    #   env:
+    #     cache-name: cache-bundle-modules
+    #   with:
+    #     path: ~/.bundle
+    #     key: ${{ runner.os }}
 
     - name: Install dependencies
       run: bundle install
