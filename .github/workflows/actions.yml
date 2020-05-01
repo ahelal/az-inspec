@@ -30,7 +30,7 @@ jobs:
       uses: actions/cache@v1
       env:
         cache-name: cache-node-modules
-        branch: ${{ GITHUB_REF }}
+        branch: ${ GITHUB_REF }
       with:
         path: ~/.bundle
         key: ${{ runner.os }}-REF-${{ env.branch }}
