@@ -1,5 +1,7 @@
 
-# inSpec AU inspec resources
+# inSpec AZ inspec resources
+
+![Ruby](https://github.com/ahelal/az-inspec/workflows/Ruby/badge.svg)
 
 This resource pack provides compliance for Azure using the az cli. Since the official pack is very slow to adapt to new resource.
 
