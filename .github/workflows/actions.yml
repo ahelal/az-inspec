@@ -17,16 +17,16 @@ jobs:
       with:
         ruby-version: 2.6
 
-    - name: Cache bundle modules
+    - name: Cache bundle 
       uses: actions/cache@v1
-      env:
-        cache-name: cache-bundle-modules
       with:
-        path: ~/.bundle
-        key: ${{ runner.os }}
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
 
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
   rubocop:
 
@@ -40,16 +40,16 @@ jobs:
       with:
         ruby-version: 2.6
 
-    - name: Cache bundle modules
+    - name: Cache bundle 
       uses: actions/cache@v1
-      env:
-        cache-name: cache-bundle-modules
       with:
-        path: ~/.bundle
-        key: ${{ runner.os }}
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
 
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
     - name: Run tests
       run: ./spec/run-test.sh rubocop
@@ -66,16 +66,16 @@ jobs:
       with:
         ruby-version: 2.6
 
-    # - name: Cache bundle modules
-    #   uses: actions/cache@v1
-    #   env:
-    #     cache-name: cache-bundle-modules
-    #   with:
-    #     path: ~/.bundle
-    #     key: ${{ runner.os }}
+    - name: Cache bundle 
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
 
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
     - name: Run tests
       run: ./spec/run-test.sh rspec
