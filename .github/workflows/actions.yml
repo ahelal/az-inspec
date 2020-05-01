@@ -48,6 +48,9 @@ jobs:
         path: ~/.bundle
         key: ${{ runner.os }}
 
+    - name: Install dependencies
+      run: bundle install
+
     - name: Run tests
       run: ./spec/run-test.sh rubocop
 
@@ -70,6 +73,9 @@ jobs:
       with:
         path: ~/.bundle
         key: ${{ runner.os }}
+
+    - name: Install dependencies
+      run: bundle install
 
     - name: Run tests
       run: ./spec/run-test.sh rspec
