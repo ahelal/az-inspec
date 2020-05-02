@@ -11,7 +11,7 @@ rubocop(){
 }
 rspec(){
     echo "Run rspec"
-    bundle exec rspec --require spec_helper --format d 
+    bundle exec rspec --format d 
 }
 
 case ${1} in

@@ -6,3 +6,6 @@ Style/MissingRespondToMissing:
   Enabled: false
 Layout/LineLength: 
   Max: 130
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
