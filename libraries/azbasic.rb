@@ -3,6 +3,7 @@
 require 'inspec/utils/object_traversal'
 require 'open3'
 require 'json'
+require 'inspec'
 
 # AZ basic class
 class AzBasic < Inspec.resource(1)

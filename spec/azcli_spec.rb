@@ -9,7 +9,7 @@ RSpec.describe 'Azcli' do
     before(:example) do
       ENV['AZCLI_BIN'] = "#{__dir__}/azmock.rb"
     end
-    it 'it should exists' do
+    it 'it should exists and support version and extensions method' do
       @az = AzCLI.new
       expect(@az.exists).to eq(true)
       expect(@az.success).to eq(true)
