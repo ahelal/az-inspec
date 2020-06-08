@@ -5,8 +5,8 @@ require 'azbasic'
 # AZ resoruces
 class AzResources < AzBasic
   name 'azresources'
-  def initialize(subcommand, resource_group = nil, extra_args = nil)
-    super(subcommand, 'list', nil, resource_group, extra_args)
+  def initialize(subcommand, resource_group = nil, extra_args = nil, subscription = nil)
+    super(subcommand, 'list', nil, resource_group, extra_args,  subscription)
     @__resource_name__ = "#{@__resource_name__}: #{subcommand} #{resource_group}"
   end
 
